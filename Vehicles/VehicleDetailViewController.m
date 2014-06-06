@@ -55,9 +55,10 @@
 {
     // Update the user interface for the detail item.
     if (self.detailVehicle) {
-        //TODO: Fill this in.
+        self.title = [self.detailVehicle vehicleTitleString];
+        self.vehicleDetailsLabel.text = [self.detailVehicle vehicleDetailsString];
     }
-}
+ }
 
 #pragma mark - IBActions
 
