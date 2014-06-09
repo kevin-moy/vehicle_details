@@ -10,5 +10,5 @@
 
 @interface Truck : Vehicle
 @property (nonatomic, assign) NSInteger cargoCapacityCubicFeet;
-
++(Truck *)truckWithBrandName:(NSString *)brandName modelName:(NSString *)modelName modelYear:(NSInteger)modelYear powerSource:(NSString *)powerSource wheels:(NSInteger)numberOfWheels cargoCapacityCubicFeet:(NSInteger)cargoCapacityCubpicFeet;
 @end

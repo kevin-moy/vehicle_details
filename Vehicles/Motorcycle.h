@@ -10,5 +10,5 @@
 
 @interface Motorcycle : Vehicle
 @property (nonatomic, strong) NSString *engineNoise;
-
++(Motorcycle *)motorcycleWithBrandName:(NSString *)brandName modelName:(NSString *)modelName modelYear:(NSInteger)modelYear engineNoise:(NSString *)engineNoise;
 @end

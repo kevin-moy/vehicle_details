@@ -9,6 +9,7 @@
 #import "VehicleDetailViewController.h"
 
 #import "Vehicle.h"
+#import "UIAlertView+Convenience.h"
 
 @interface VehicleDetailViewController ()
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
@@ -64,28 +65,44 @@
 
 -(IBAction)turn
 {
-    //TODO: Fill this in.
+    UIAlertView *turnEntryAlertView = [[UIAlertView alloc] initWithTitle:@"Turn" message:@"Enter number of degrees to turn:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"GO!", nil];
+    turnEntryAlertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [[turnEntryAlertView textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeNumberPad];
+    [turnEntryAlertView show];
 }
 
 -(IBAction)goForward
 {
-    //TODO: Fill this in.
+    [UIAlertView showSimpleAlertWithTitle:@"Go Foward" andMessage:[self.detailVehicle goForward]];
 }
 
 -(IBAction)goBackward
 {
-    //TODO: Fill this in.
+    [UIAlertView showSimpleAlertWithTitle:@"Go Backward" andMessage:[self.detailVehicle goBackward]];
 }
 
 -(IBAction)stopMoving
 {
-    //TODO: Fill this in.
+    [UIAlertView showSimpleAlertWithTitle:@"Stop Moving" andMessage:[self.detailVehicle stopMoving]];
 }
 
 
 -(IBAction)makeNoise
 {
-    //TODO: Fill this in.
+    [UIAlertView showSimpleAlertWithTitle:@"Make Noise" andMessage:[self.detailVehicle makeNoise]];
 }
-
+#pragma mark - UIAlertViewDelegate method
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        //Get the text the user input in the text field
+        NSString *degrees = [[alertView textFieldAtIndex:0] text];
+        
+        //Convert it from a string to an integer
+        NSInteger degreesInt = [degrees integerValue];
+        
+        //Use the simple alert view to display the information for turning.
+        [UIAlertView showSimpleAlertWithTitle:@"Turn" andMessage:[self.detailVehicle turn:degreesInt]];
+    }
+}
 @end

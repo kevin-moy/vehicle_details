@@ -9,14 +9,29 @@
 #import "Car.h"
 
 @implementation Car
-
-- (id)init
+#pragma mark - Factory Method
++(Car *)carWithBrandName:(NSString *)brandName modelName:(NSString *)modelName modelYear:(NSInteger)modelYear powerSource:(NSString *)powerSource numberOfDoors:(NSInteger)numberOfDoors convertible:(BOOL)isConvertible hatchback:(BOOL)isHatchback sunroof:(BOOL)hasSunroof
+{
+    //Create car using superclass factory method
+    Car *newCar = [Car vehicleWithBrandName:brandName modelName:modelName modelYear:modelYear powerSource:powerSource wheels:4];
+    
+    //Set car-specific properties using passed in variables
+    newCar.numberOfDoors = numberOfDoors;
+    newCar.isConvertible = isConvertible;
+    newCar.isHatchback = isHatchback;
+    newCar.hasSunroof = hasSunroof;
+    
+    return newCar;
+}
+//init method 
+/*- (id)init
 {
     if (self = [super init]) {
         self.numberOfWheels = 4;
     }
     return self;
 }
+ */
 // Super class overrides
 - (NSString *)start
 {

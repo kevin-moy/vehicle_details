@@ -26,4 +26,9 @@
 
 //method for UITAblesviewcells and UINavigationBar titles
 - (NSString *)vehicleTitleString;
+
+//Factory Method
+
++ (instancetype)vehicleWithBrandName:(NSString *)brandName modelName:(NSString *)modelName modelYear:(NSInteger)modelYear powerSource:(NSString *)powerSource wheels:(NSInteger)numberOfWheels;
+
 @end

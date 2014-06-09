@@ -10,7 +10,15 @@
 
 @implementation Motorcycle
 
-#pragma mark - Initialization
+#pragma mark - Factory method
++(Motorcycle *)motorcycleWithBrandName:(NSString *)brandName modelName:(NSString *)modelName modelYear:(NSInteger)modelYear engineNoise:(NSString *)engineNoise
+{
+    Motorcycle *newMotorcycle = [Motorcycle vehicleWithBrandName:brandName modelName:modelName modelYear:modelYear powerSource:@"gas engine" wheels:2];
+
+    newMotorcycle.engineNoise = engineNoise;
+    
+    return newMotorcycle;
+}
 - (id)init
 {
     if (self = [super init]) {

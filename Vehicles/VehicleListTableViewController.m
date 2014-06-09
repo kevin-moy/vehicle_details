@@ -10,9 +10,7 @@
 
 #import "VehicleDetailViewController.h"
 #import "Vehicle.h"
-#import "Car.h"
-#import "Motorcycle.h"
-#import "Truck.h"
+#import "VehicleList.h"
 
 @interface VehicleListTableViewController ()
 @property (nonatomic, strong) NSMutableArray *vehicles;
@@ -24,12 +22,12 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    //Initialize vehicle array
+/*    //Initialize vehicle array
     self.vehicles = [NSMutableArray array];
     
     //Call setup method
-    [self setupVehicleArray];
-
+   [self setupVehicleArray];
+*/
     //Set title of view controller, will display in navigation bar
     self.title = @"Vehicles";
     
@@ -47,10 +45,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-#pragma mark - Data setup
+/*  Using Singleton Pattern
+ 
+ #pragma mark - Data setup
 -(void)setupVehicleArray
 {
     // Creates a car
+    //Create car with init method
     Car *mustang = [[Car alloc] init];
     mustang.brandName = @"Ford";
     mustang.modelName = @"Mustang";
@@ -60,77 +61,41 @@
     mustang.hasSunroof = NO;
     mustang.numberOfDoors = 2;
     mustang.powerSource = @"gas engine";
-    
+ 
+    //Using factory class method
+    Car *mustang = [Car carWithBrandName:@"Ford" modelName:@"Mustang" modelYear:1968 powerSource:@"gas engine" numberOfDoors:2 convertible:YES hatchback:NO sunroof:NO];
     // Add to array
     [self.vehicles addObject:mustang];
     
     //Create another car.
-    Car *outback = [[Car alloc] init];
-    outback.brandName = @"Subaru";
-    outback.modelName = @"Outback";
-    outback.modelYear = 1999;
-    outback.isConvertible = NO;
-    outback.isHatchback = YES;
-    outback.hasSunroof = NO;
-    outback.numberOfDoors = 5;
-    outback.powerSource = @"gas engine";
+    Car *outback = [Car carWithBrandName:@"Subaru" modelName:@"Outback" modelYear:1999 powerSource:@"gas engine" numberOfDoors:5 convertible:NO hatchback:YES sunroof:NO];
     
     //Add it to the array.
     [self.vehicles addObject:outback];
     
-    //Create another car
-    Car *prius = [[Car alloc] init];
-    prius.brandName = @"Toyota";
-    prius.modelName = @"Prius";
-    prius.modelYear = 2002;
-    prius.hasSunroof = YES;
-    prius.isConvertible = NO;
-    prius.isHatchback = YES;
-    prius.numberOfDoors = 4;
-    prius.powerSource = @"hybrid engine";
-    
+    Car *prius = [Car carWithBrandName:@"Toyota" modelName:@"Prius" modelYear:2007 powerSource:@"hybrid engine" numberOfDoors:5 convertible:YES hatchback:YES sunroof:YES];
+
     //Add it to the array.
     [self.vehicles addObject:prius];
     
     //Create a motorcycle
-    Motorcycle *harley = [[Motorcycle alloc] init];
-    harley.brandName = @"Harley-Davidson";
-    harley.modelName = @"Softail";
-    harley.modelYear = 1979;
-    harley.engineNoise = @"Vrrrrrrrroooooooooom!";
-    
+    Motorcycle *harley = [Motorcycle motorcycleWithBrandName:@"Harley-Davidson"modelName:@"Softail" modelYear:1979 engineNoise:@"Vrrrrrrrroooooooooom!"];
     //Add to array
     [self.vehicles addObject:harley];
     
-    Motorcycle *kawasaki = [[Motorcycle alloc] init];
-    kawasaki.brandName = @"Kawasaki";
-    kawasaki.modelName = @"Ninja";
-    kawasaki.modelYear = 2005;
-    kawasaki.engineNoise = @"Neeeeeeeeeeeeeeeeow!";
+    Motorcycle *kawasaki = [Motorcycle motorcycleWithBrandName:@"Kawasaki"modelName:@"Ninja" modelYear:2005 engineNoise:@"Neeeeeeeeeeeeeeeeow!"];
+    
     
     //Add it to the array
     [self.vehicles addObject:kawasaki];
     
     //Create a truck
-    Truck *silverado = [[Truck alloc] init];
-    silverado.brandName = @"Chevrolet";
-    silverado.modelName = @"Silverado";
-    silverado.modelYear = 2011;
-    silverado.numberOfWheels = 4;
-    silverado.cargoCapacityCubicFeet = 53;
-    silverado.powerSource = @"gas engine";
+    Truck *silverado = [Truck truckWithBrandName:@"Chevrolet" modelName:@"Silverado" modelYear:2011 powerSource:@"gas engine" wheels:4 cargoCapacityCubicFeet:53];
     
     //Add it to the array
     [self.vehicles addObject:silverado];
     
-    //Create another truck
-    Truck *eighteenWheeler = [[Truck alloc] init];
-    eighteenWheeler.brandName = @"Peterbilt";
-    eighteenWheeler.modelName = @"579";
-    eighteenWheeler.modelYear = 2013;
-    eighteenWheeler.numberOfWheels = 18;
-    eighteenWheeler.cargoCapacityCubicFeet = 408;
-    eighteenWheeler.powerSource = @"diesel engine";
+    Truck *eighteenWheeler = [Truck truckWithBrandName:@"Peterbilt" modelName:@"579" modelYear:2013 powerSource:@"diesel engine" wheels:18 cargoCapacityCubicFeet:408];
     
     //Add it to the array
     [self.vehicles addObject:eighteenWheeler];
@@ -138,7 +103,7 @@
     NSSortDescriptor *modelYear = [NSSortDescriptor sortDescriptorWithKey:@"modelYear" ascending:YES];
     [self.vehicles sortUsingDescriptors:@[modelYear]];
 }
-
+*/
 
 #pragma mark - Table View Data Source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -148,15 +113,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.vehicles.count;
+    return [[VehicleList sharedInstance] vehicles].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    Vehicle *rowVehicle = self.vehicles[indexPath.row];
-    cell.textLabel.text = [rowVehicle vehicleTitleString];
+    Vehicle *vehicle = [[VehicleList sharedInstance] vehicles][indexPath.row];
+    cell.textLabel.text = [vehicle vehicleTitleString];
     return cell;
 }
 
@@ -165,7 +130,7 @@
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        Vehicle *selectedVehicle = self.vehicles[indexPath.row];
+        Vehicle *selectedVehicle = [[VehicleList sharedInstance] vehicles][indexPath.row];
         [[segue destinationViewController] setDetailVehicle:selectedVehicle];
     }
 }

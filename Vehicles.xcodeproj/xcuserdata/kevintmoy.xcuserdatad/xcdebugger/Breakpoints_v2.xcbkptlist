@@ -9,29 +9,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Vehicles/Car.m"
-            timestampString = "423782931.150888"
+            filePath = "Vehicles/Truck.m"
+            timestampString = "423997258.445579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "-goForward"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "-goBackward"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Vehicles/Truck.m"
-            timestampString = "423787664.539988"
+            filePath = "Vehicles/Car.m"
+            timestampString = "423995337.082055"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "-goBackward"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "+carWithBrandName:modelName:modelYear:powerSource:numberOfDoors:convertible:hatchback:sunroof:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
